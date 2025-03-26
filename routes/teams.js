@@ -7,36 +7,12 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const teamsResponse = await axios.get(`${BASE_URL}/teams?season=2024`, {
+    const { data } = await axios.get(`${BASE_URL}/teams?season=2024`, {
       headers: {
         Authorization: `${process.env.API_KEY}`,
       },
     });
-    const matchesResponse = await axios.get(
-      `${BASE_URL}/games?season=2024&week=1`,
-      {
-        headers: {
-          Authorization: `${process.env.API_KEY}`,
-        },
-      }
-    );
-    const updatedMatches = matchesResponse.data.data.map((match) => {
-      const foundHomeTeam = teamsResponse.data.data.find((team) => {
-        return team.id === match.home_team_id;
-      });
-
-      const foundAwayTeam = teamsResponse.data.data.find((team) => {
-        return team.id === match.away_team_id;
-      });
-      const updatedMatch = {
-        ...match,
-        home_team_name: foundHomeTeam.name,
-        away_team_name: foundAwayTeam.name,
-      };
-      return updatedMatch;
-    });
-    console.log(updatedMatches);
-    res.json(201);
+    res.json(data.data);
   } catch (error) {
     console.log(error);
     res.status(500).send("error fetching teams or matches");

@@ -30,6 +30,8 @@ const fetchFixtures = async () => {
         ...match,
         home_team_name: foundHomeTeam.name,
         away_team_name: foundAwayTeam.name,
+        home_team_abbr: foundHomeTeam.abbr,
+        away_team_abbr: foundAwayTeam.abbr,
       };
       return updatedMatch;
     });

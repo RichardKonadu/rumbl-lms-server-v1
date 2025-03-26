@@ -1,7 +1,6 @@
 import express from "express";
 import "dotenv/config";
-import axios from "axios";
-import { fetchFixtures } from "../utils/helpers.js";
+import { fetchFixtures } from "../utils/helper.js";
 
 const router = express.Router();
 
