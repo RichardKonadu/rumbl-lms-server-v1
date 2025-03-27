@@ -15,4 +15,18 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: error });
   }
 });
+
+router.get("/", async (req, res) => {
+  const sql = `SELECT * FROM leagues`;
+  try {
+    const [results] = await connection.query(sql);
+    if (!results.length) {
+      res.status(404).json({ msg: "No leagues in database" });
+    }
+
+    res.json(results);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 export default router;
