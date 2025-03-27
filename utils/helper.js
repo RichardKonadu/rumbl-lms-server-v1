@@ -3,7 +3,7 @@ import axios from "axios";
 
 const BASE_URL = "https://api.balldontlie.io/epl/v1";
 
-const fetchFixtures = async () => {
+const fetchFixtures = async (gameweek) => {
   try {
     const teamsResponse = await axios.get(`${BASE_URL}/teams?season=2024`, {
       headers: {
@@ -11,7 +11,7 @@ const fetchFixtures = async () => {
       },
     });
     const matchesResponse = await axios.get(
-      `${BASE_URL}/games?season=2024&week=1`,
+      `${BASE_URL}/games?season=2024&week=${gameweek}`,
       {
         headers: {
           Authorization: `${process.env.API_KEY}`,
