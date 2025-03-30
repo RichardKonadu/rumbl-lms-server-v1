@@ -35,12 +35,8 @@ const fetchFixtures = async (gameweek) => {
       };
       return updatedMatch;
     });
-    // res.json(201);
     return updatedMatches;
-  } catch (error) {
-    console.log(error);
-    // res.status(500).send("error fetching teams or matches");
-  }
+  } catch (error) {}
 };
 
 export { fetchFixtures };

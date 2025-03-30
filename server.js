@@ -6,6 +6,7 @@ import teamRoutes from "./routes/teams.js";
 import fixtureRoutes from "./routes/fixtures.js";
 import predictionRoutes from "./routes/predictions.js";
 import leagueRoutes from "./routes/leagues.js";
+import leagueUserRoutes from "./routes/leagueuser.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/teams", teamRoutes);
 app.use("/fixtures", fixtureRoutes);
 app.use("/predictions", predictionRoutes);
 app.use("/leagues", leagueRoutes);
+app.use("/leagueuser", leagueUserRoutes);
 
 const PORT = process.env.PORT || 8080;
 
