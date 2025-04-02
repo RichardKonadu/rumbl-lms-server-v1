@@ -37,6 +37,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/results", async (req, res) => {
+  console.log("endpoint hit");
+  const leagueId = req.query.leagueId;
+  const sql = `SELECT * FROM predictions
+               WHERE league_id = ?`;
+
+  try {
+    const [results] = await connection.query(sql, [leagueId]);
+    if (!results.length) {
+      res.status(404).json({ msg: "No predictions in database" });
+    }
+    res.json(results);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
 router.get("/:leagueid", authorise, async (req, res) => {
   const leagueId = req.params.leagueid;
 
@@ -60,7 +77,6 @@ router.get("/:leagueid", authorise, async (req, res) => {
     }
     res.json(results);
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 });

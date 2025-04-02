@@ -5,17 +5,25 @@ import authorise from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", authorise, async (req, res) => {
   const leagueData = req.body;
+  // create a league, add user to that league
   const sql = `INSERT INTO leagues SET ?`;
+  const sqlAddUserToLeague = `INSERT INTO league_user SET ?`;
 
   try {
     const [results] = await connection.query(sql, [leagueData]);
-    res.status(201).json({ msg: "League successfully created" });
+    await connection.query(sqlAddUserToLeague, [
+      { league_id: results.insertId, user_id: req.token.id },
+    ]);
+    res
+      .status(201)
+      .json({ msg: "League created and user added to new league" });
   } catch (error) {
     res.status(500).json({ error: error });
   }
 });
+
 router.post("/join/:id", authorise, async (req, res) => {
   const leagueId = req.params.id;
   const sql = `INSERT INTO
@@ -25,7 +33,6 @@ router.post("/join/:id", authorise, async (req, res) => {
     const [results] = await connection.query(sql, [req.token.id, leagueId]);
     res.status(201).json(results);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error });
   }
 });
