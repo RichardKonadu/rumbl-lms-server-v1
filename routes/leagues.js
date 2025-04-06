@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post("/", authorise, async (req, res) => {
   const leagueData = req.body;
-  // create a league, add user to that league
   const sql = `INSERT INTO leagues SET ?`;
   const sqlAddUserToLeague = `INSERT INTO league_user SET ?`;
 

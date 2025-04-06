@@ -17,6 +17,14 @@ router.post("/register", async (req, res) => {
       .json({ msg: "You must provide a name, email and password" });
   }
   try {
+    const findUserSql = `SELECT * FROM users WHERE email = ?`;
+
+    const [userResult] = await connection.query(findUserSql, [req.body.email]);
+
+    if (userResult.length > 0) {
+      return res.status(409).json("Email already in use");
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
     const sql = `INSERT INTO users
@@ -27,10 +35,16 @@ router.post("/register", async (req, res) => {
       req.body.email,
       hashedPassword,
     ]);
-    console.log(hashedPassword);
-    res.status(201).json({ msg: `User created with ID ${result.insertId}` });
+    const leagueSql = `INSERT INTO league_user (league_id, user_id) VALUES (?, ?)`;
+    await connection.query(leagueSql, [6, result.insertId]);
+
+    res
+      .status(201)
+      .json({
+        msg: `User created with ID ${result.insertId} and added to global league`,
+      });
   } catch (error) {
-    res.status(500).json({ msg: `Couldn't create new user: ${error.message}` });
+    res.status(501).json(error.message);
   }
 });
 

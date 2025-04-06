@@ -38,7 +38,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/results", async (req, res) => {
-  console.log("endpoint hit");
   const leagueId = req.query.leagueId;
   const sql = `SELECT * FROM predictions
                WHERE league_id = ?`;

@@ -72,27 +72,33 @@ VALUES
 INSERT INTO 
     `leagues` (`name`, `sport`) 
 VALUES
-    ('test league', 'Football'),
-    ('league two', 'Football'),
-    ('league three', 'NBA');
+    ('Demo league', 'Football'),
+    ('League Two', 'Football'),
+    ('League Three', 'NBA'),
+    ('Global League', 'Football')
 
 INSERT INTO 
     `predictions` (`game_week`, `did_win`, `team_id`, `user_id`, `league_id`) 
 VALUES
-    ( 1, 1, 2, 3, 1),
-    ( 1, 1, 2, 1, 1);
+    ( 26, 1, 26, 1, 1),
+    ( 26, 1, 26, 2, 1),
+    ( 26, 0, 1, 3, 1),
+    ( 26, 1, 45, 4, 1),
+    ( 27, 1, 29, 1, 1),
+    ( 27, 1, 29, 2, 1),
+    ( 27, 1, 29, 4, 1),
+    ( 28, 1, 17, 1, 1),
+    ( 28, 1, 17, 2, 1),
+    ( 28, 0, 10, 4, 1).
+    ( 29, 1, 1, 1, 1),
+    ( 29, 0, 28, 2, 1);
 
 INSERT INTO
 	`league_user` (`league_id`, `user_id`)
 VALUES
+	(1, 1),
 	(1, 2),
 	(1, 3),
-	(2, 2),
-	(2, 3);
+	(1, 4);
 
 
-
---  results 
-    --  coloumns id 
-            --  sport / epl 
-            --  gw - 1

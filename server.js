@@ -10,7 +10,8 @@ import leagueUserRoutes from "./routes/leagueuser.js";
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL }));
+app.use(cors({ origin: process.env.LOCAL_URL }));
+
 app.use(express.json());
 
 app.use("/users", userRoutes);
@@ -20,8 +21,10 @@ app.use("/predictions", predictionRoutes);
 app.use("/leagues", leagueRoutes);
 app.use("/leagueuser", leagueUserRoutes);
 
-const PORT = process.env.PORT || 8080;
-
+const PORT = process.env.PORT || 8082;
+app.get("/", (req, res) => {
+  res.send("working");
+});
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

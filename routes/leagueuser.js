@@ -18,6 +18,7 @@ router.get("/", authorise, async (req, res) => {
     if (!results.length) {
       res.status(404).json({ msg: "No league members found" });
     }
+
     res.json(results);
   } catch (error) {
     res.status(500).json({ error: error });
@@ -36,6 +37,9 @@ router.get("/users", authorise, async (req, res) => {
     const [results] = await connection.query(sql, [leagueId]);
     if (!results.length) {
       res.status(404).json({ msg: "No users for provided league" });
+    }
+    if (!results.length) {
+      return res.status(200).json([]);
     }
     res.json(results);
   } catch (error) {
