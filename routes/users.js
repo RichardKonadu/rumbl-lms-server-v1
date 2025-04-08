@@ -35,14 +35,10 @@ router.post("/register", async (req, res) => {
       req.body.email,
       hashedPassword,
     ]);
-    const leagueSql = `INSERT INTO league_user (league_id, user_id) VALUES (?, ?)`;
-    await connection.query(leagueSql, [6, result.insertId]);
 
-    res
-      .status(201)
-      .json({
-        msg: `User created with ID ${result.insertId} and added to global league`,
-      });
+    res.status(201).json({
+      msg: `User created with ID ${result.insertId}`,
+    });
   } catch (error) {
     res.status(501).json(error.message);
   }

@@ -17,6 +17,7 @@ router.get("/", authorise, async (req, res) => {
     const [results] = await connection.query(sql, [req.token.id]);
     if (!results.length) {
       res.status(404).json({ msg: "No league members found" });
+      return;
     }
 
     res.json(results);

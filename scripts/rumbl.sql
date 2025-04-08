@@ -74,8 +74,7 @@ INSERT INTO
 VALUES
     ('Demo league', 'Football'),
     ('League Two', 'Football'),
-    ('League Three', 'NBA'),
-    ('Global League', 'Football')
+    ('League Three', 'NBA');
 
 INSERT INTO 
     `predictions` (`game_week`, `did_win`, `team_id`, `user_id`, `league_id`) 
@@ -89,7 +88,7 @@ VALUES
     ( 27, 1, 29, 4, 1),
     ( 28, 1, 17, 1, 1),
     ( 28, 1, 17, 2, 1),
-    ( 28, 0, 10, 4, 1).
+    ( 28, 0, 10, 4, 1),
     ( 29, 1, 1, 1, 1),
     ( 29, 0, 28, 2, 1);
 
