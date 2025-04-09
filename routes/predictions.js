@@ -4,11 +4,21 @@ import connection from "../utils/connection.js";
 import authorise from "../middleware/auth.js";
 
 const router = express.Router();
+const currentGameWeek = 32;
 
 router.post("/", authorise, async (req, res) => {
   const predictionData = req.body;
+
+  if (predictionData.game_week !== currentGameWeek) {
+    res.status(400).json({
+      msg: `You can only predict for the current game week which is ${currentGameWeek}`,
+    });
+
+    return;
+  }
+
   const sql = `INSERT INTO predictions
-                SET game_week = ?, team_id = ?, user_id = ?, league_id = ?`;
+               SET game_week = ?, team_id = ?, user_id = ?, league_id = ?`;
 
   try {
     const [results] = await connection.query(sql, [
