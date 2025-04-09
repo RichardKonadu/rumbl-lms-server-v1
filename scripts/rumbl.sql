@@ -20,6 +20,7 @@ CREATE TABLE `leagues` (
     `id` BIGINT unsigned AUTO_INCREMENT,
     `name` varchar(255) NOT NULL, 
     `sport` varchar(50) NOT NULL,
+    `in_progress` BOOLEAN,
     `created_at` timestamp DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -70,11 +71,11 @@ VALUES
 	('Riley Clark', 'rileyclark10@example.com', '$2b$08$V38UShGPRc0Yr90nT3vEjOgIpaI2D5L42FGC1bZ54SS4z.xZee0Wy');
 
 INSERT INTO 
-    `leagues` (`name`, `sport`) 
+    `leagues` (`name`, `sport`, `in_progress`) 
 VALUES
-    ('Demo league', 'Football'),
-    ('League Two', 'Football'),
-    ('League Three', 'NBA');
+    ('Demo league', 'Football', 1),
+    ('League Two', 'Football', 0),
+    ('League Three', 'NBA', 0);
 
 INSERT INTO 
     `predictions` (`game_week`, `did_win`, `team_id`, `user_id`, `league_id`) 
