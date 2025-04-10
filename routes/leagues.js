@@ -37,7 +37,8 @@ router.post("/join/:id", authorise, async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const sql = `SELECT * FROM leagues`;
+  const sql = `SELECT * FROM leagues
+               WHERE in_progress = 0`;
   try {
     const [results] = await connection.query(sql);
     if (!results.length) {
