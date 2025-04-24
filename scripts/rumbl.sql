@@ -30,6 +30,7 @@ CREATE TABLE `predictions` (
     `id` BIGINT unsigned AUTO_INCREMENT,
     `game_week`bigint unsigned DEFAULT NULL,
     `did_win` BOOLEAN,
+    `eliminated` BOOLEAN DEFAULT 0,
     `team_id` bigint unsigned DEFAULT NULL,
     `user_id` bigint unsigned DEFAULT NULL,
     `league_id` bigint unsigned DEFAULT NULL,
@@ -78,7 +79,7 @@ VALUES
     ('League Three', 'NBA', 0);
 
 INSERT INTO 
-    `predictions` (`game_week`, `did_win`, `team_id`, `user_id`, `league_id`) 
+    `predictions` (`game_week`, `did_win`,  `team_id`, `user_id`, `league_id`) 
 VALUES
     ( 26, 1, 26, 1, 1),
     ( 26, 1, 26, 2, 1),

@@ -45,6 +45,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  // const {email }= req.body
   if (!req.body.email || !req.body.password) {
     return res
       .status(400)
